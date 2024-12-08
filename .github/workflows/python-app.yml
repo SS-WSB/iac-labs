@@ -39,7 +39,7 @@ jobs:
                 path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
                 key: ${{ runner.os }}-venv
           lint:
-            runs-on: some-os
+            runs-on: ${{ matrix.os }}
   
             defaults:
               run:
@@ -68,7 +68,7 @@ jobs:
   
   
           formatter:
-              runs-on: some-os
+              runs-on: ${{ matrix.os }}
     
               defaults:
                 run:
@@ -96,7 +96,7 @@ jobs:
                   poetry run task formatter
   
           security:
-            runs-on: some-os
+            runs-on: ${{ matrix.os }}
     
             defaults:
               run:
@@ -124,7 +124,7 @@ jobs:
                     poetry run task security
 
           unittest:
-            runs-on: some-os
+            runs-on: ${{ matrix.os }}
   
             defaults:
               run:
