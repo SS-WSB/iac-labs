@@ -14,8 +14,15 @@ permissions:
 
 jobs:
       build:
-    
-        runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            os: [ubuntu-latest, windows-latest]
+        runs-on: ${{ matrix.os }}
+        defaults:
+          run: 
+            working-directory: ./example-app
+            shell: bash
+        
     
         steps:
         - uses: actions/checkout@v4
@@ -28,14 +35,11 @@ jobs:
             poetry install --no-root
         - name: Install Poetry
           uses: snok/install-poetry@v1
-        - name: Install dependencies
-          run: |
-            poetry install --no-root
         - name: Recover cached deps
           id: cached-poetry-dependencies
           uses: actions/cache@v3
           with:
-            path: /home/runner/work/<path>/example-app/.venv
+            path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
             key: ${{ runner.os }}-venv
       lint:
           runs-on: some-os
@@ -61,7 +65,7 @@ jobs:
             id: cached-poetry-dependencies
             uses: actions/cache@v3
             with:
-              path: /home/runner/work/<path>/example-app/.venv
+              path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
               key: ${{ runner.os }}-venv
           - name: Run Lint
             run: |
@@ -92,7 +96,7 @@ jobs:
             id: cached-poetry-dependencies
             uses: actions/cache@v3
             with:
-              path: /home/runner/work/<path>/example-app/.venv
+              path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
               key: ${{ runner.os }}-venv
           - name: Run Security
             run: |
@@ -122,7 +126,7 @@ jobs:
             id: cached-poetry-dependencies
             uses: actions/cache@v3
             with:
-              path: /home/runner/work/<path>/example-app/.venv
+              path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
               key: ${{ runner.os }}-venv
           - name: Run Security
             run: |
@@ -150,7 +154,7 @@ jobs:
             id: cached-poetry-dependencies
             uses: actions/cache@v3
             with:
-              path: /home/runner/work/<path>/example-app/.venv
+              path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
               key: ${{ runner.os }}-venv
           - name: Run Test
             run: |
