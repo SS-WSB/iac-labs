@@ -9,10 +9,7 @@ on:
   pull_request:
     branches: [ "main" ]
 
-  permissions:
-    contents: read
-
-    jobs:
+jobs:
           build:
             strategy:
               matrix:
@@ -72,7 +69,7 @@ on:
                   poetry run task lint
   
   
-            formatter:
+          formatter:
               runs-on: some-os
     
               defaults:
@@ -102,16 +99,16 @@ on:
                 run: |
                   poetry run task formatter
   
-            security:
-              runs-on: some-os
+          security:
+            runs-on: some-os
     
-              defaults:
+            defaults:
                 run:
                 working-directory: ./example-app
-              needs: build
-              concurrency:
-              group: Poetry
-              steps:
+            needs: build
+            concurrency:
+            group: Poetry
+            steps:
               - uses: actions/checkout@v4
               - name: Set up Python 3.10
                 uses: actions/setup-python@v3
@@ -123,14 +120,14 @@ on:
                 run: |
                   poetry install --no-root
               - name: Recover cached deps
-              id: cached-poetry-dependencies
-              uses: actions/cache@v3
-              with:
+                id: cached-poetry-dependencies
+                uses: actions/cache@v3
+                with:
                 path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
                 key: ${{ runner.os }}-venv
-              -name: Run Security
-              run: |
-                  poetry run task security
+                -name: Run Security
+                  run: |
+                    poetry run task security
 
           unittest:
             runs-on: some-os
