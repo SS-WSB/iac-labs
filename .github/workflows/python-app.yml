@@ -93,7 +93,7 @@ jobs:
                   key: ${{ runner.os }}-venv
               - name: Run Security
                 run: |
-                  poetry run task formatter
+                    poetry run task formatter
   
           security:
             runs-on: ubuntu-latest
