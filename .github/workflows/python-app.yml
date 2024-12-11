@@ -149,4 +149,4 @@ jobs:
                   key: ${{ runner.os }}-venv
               - name: Run Test
                 run: |
-                  poetry run task test  
+                    poetry run task test  
