@@ -126,7 +126,7 @@ jobs:
 
           unittest:
             runs-on: ubuntu-latest
-  
+    
             defaults:
               run:
                 working-directory: ./example-app
@@ -148,6 +148,6 @@ jobs:
                 with:
                   path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
                   key: ${{ runner.os }}-venv
-              - name: Run Test
+              - name: Run Security
                 run: |
-                    poetry run task test  
+                    poetry run task security
