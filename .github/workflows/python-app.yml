@@ -38,11 +38,12 @@ jobs:
               with:
                 path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
                 key: ${{ runner.os }}-venv
+                
           lint:
             runs-on: ubuntu-latest
   
             defaults:
-              run:
+               run:
                 working-directory: ./example-app
             needs: build
             steps:
@@ -68,32 +69,32 @@ jobs:
   
   
           formatter:
-              runs-on: ubuntu-latest
+            runs-on: ubuntu-latest
     
-              defaults:
-                run:
-                  working-directory: ./example-app
-              needs: build
-              steps:
-              - uses: actions/checkout@v4
-              - name: Set up Python 3.10
-                uses: actions/setup-python@v3
-                with:
-                  python-version: "3.11"
-              - name: Install Poetry
-                uses: snok/install-poetry@v1
-              - name: Install dependencies
-                run: |
-                    poetry install --no-root
-              - name: Recover cached deps
-                id: cached-poetry-dependencies
-                uses: actions/cache@v3
-                with:
-                  path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
-                  key: ${{ runner.os }}-venv
-              - name: Run Security
-                run: |
-                    poetry run task formatter
+            defaults:
+              run:
+                working-directory: ./example-app
+            needs: build
+            steps:
+             - uses: actions/checkout@v4
+             - name: Set up Python 3.10
+               uses: actions/setup-python@v3
+               with:
+                 python-version: "3.11"
+             - name: Install Poetry
+               uses: snok/install-poetry@v1
+             - name: Install dependencies
+               run: |
+                   poetry install --no-root
+             - name: Recover cached deps
+               id: cached-poetry-dependencies
+               uses: actions/cache@v3
+               with:
+                 path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
+                 key: ${{ runner.os }}-venv
+             - name: Run Security
+               run: |
+                  poetry run task formatter
   
           security:
             runs-on: ubuntu-latest
