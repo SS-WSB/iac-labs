@@ -130,7 +130,7 @@ jobs:
             defaults:
               run:
                 working-directory: ./example-app
-            needs: [lint, security, formatter]
+            needs: [lint, formatter, security]
             steps:
               - uses: actions/checkout@v4
               - name: Set up Python 3.10
