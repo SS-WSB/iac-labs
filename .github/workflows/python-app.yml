@@ -14,7 +14,7 @@ jobs:
             strategy:
               matrix:
                 os: [ubuntu-latest, windows-latest]
-            runs-on: ${{ matrix.os }}
+            runs-on: ubuntu-latest
             defaults:
               run: 
                 working-directory: ./example-app
@@ -39,7 +39,7 @@ jobs:
                 path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
                 key: ${{ runner.os }}-venv
           lint:
-            runs-on: ${{ matrix.os }}
+            runs-on: ubuntu-latest
   
             defaults:
               run:
@@ -68,7 +68,7 @@ jobs:
   
   
           formatter:
-              runs-on: ${{ matrix.os }}
+              runs-on: ubuntu-latest
     
               defaults:
                 run:
