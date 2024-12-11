@@ -1,6 +1,3 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
 name: Python application
 
 on:
@@ -88,7 +85,7 @@ jobs:
         with:
           path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
           key: ${{ runner.os }}-venv
-      - name: Run Security
+      - name: Run Formatter
         run: |
           poetry run task formatter
 
@@ -142,6 +139,6 @@ jobs:
         with:
           path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
           key: ${{ runner.os }}-venv
-      - name: Run Test
+      - name: Run Tests
         run: |
           poetry run task test
